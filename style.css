@@ -22,7 +22,7 @@ main {
   max-width: 900px;
 }
 
-#login-button{
+#login-button {
   margin: 10px;
 }
 #placeholder {
@@ -130,6 +130,42 @@ header {
 }
 
 .modal-text {
+  width: calc(100% - 10px);
+  min-height: 43px;
+  margin: 0 5px;
+  padding: 10px 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  letter-spacing: 0.00625em;
+  border: 0;
+  overflow: hidden;
+  position: relative;
+  color: #202124;
+  font-size: 14px;
+  line-height: 19px;
+  min-height: 46px;
+  padding: 4px 16px 12px 0px;
+}
+.modal-color {
+  width: calc(100% - 10px);
+  min-height: 43px;
+  margin: 0 5px;
+  padding: 10px 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  letter-spacing: 0.00625em;
+  border: 0;
+  overflow: hidden;
+  position: relative;
+  color: #202124;
+  font-size: 14px;
+  line-height: 19px;
+  min-height: 46px;
+  padding: 4px 16px 12px 0px;
+}
+.modal-label {
   width: calc(100% - 10px);
   min-height: 43px;
   margin: 0 5px;

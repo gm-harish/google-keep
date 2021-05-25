@@ -22,6 +22,8 @@ class App {
     this.$modal = document.querySelector('.modal');
     this.$modalTitle = document.querySelector('.modal-title');
     this.$modalText = document.querySelector('.modal-text');
+    this.$modalcolor = document.querySelector('.modal-color');
+    this.$modallabel = document.querySelector('.modal-label');
     this.$modalCloseButton = document.querySelector('.modal-close-button');
 
     this.addEventListeners();
@@ -42,7 +44,7 @@ class App {
       const hasNote = label && (title || text);
       if (hasNote) {
         // add note
-        this.addNote({title, text, label});
+        this.addNote({title, text, label, color});
       }
     });
 
@@ -114,6 +116,8 @@ class App {
       this.$modal.classList.toggle('open-modal');
       this.$modalTitle.value = this.title;
       this.$modalText.value = this.text;
+      this.$modalcolor.value = this.color;
+      this.$modallabel.value = this.label;
     }
   }
 
@@ -131,6 +135,7 @@ class App {
       id: this.notes.length > 0 ? this.notes[this.notes.length - 1].id + 1 : 1,
     };
     this.notes = [...this.notes, newNote];
+    console.log(this.notes);
     this.$noteSort.value = '';
     this.sort = '';
     this.displayNotes();
@@ -140,8 +145,11 @@ class App {
   editNote() {
     const title = this.$modalTitle.value;
     const text = this.$modalText.value;
+    const color = this.$modalcolor.value;
+    const label = this.$modallabel.value;
+
     this.notes = this.notes.map((note) =>
-      note.id === Number(this.id) ? {...note, title, text} : note
+      note.id === Number(this.id) ? {...note, title, text, color, label} : note
     );
     this.displayNotes();
   }
@@ -149,10 +157,16 @@ class App {
   selectNote(event) {
     const $selectedNote = event.target.closest('.note');
     if (!$selectedNote) return;
-    const [$noteTitle, $noteText] = $selectedNote.children;
-    this.title = $noteTitle.innerText;
-    this.text = $noteText.innerText;
+    // const [$noteTitle, $noteText] = $selectedNote.children;
+    // this.title = $noteTitle.innerText;
+    // this.text = $noteText.innerText;
     this.id = $selectedNote.dataset.id;
+    const index = this.notes.findIndex((note) => note.id == this.id);
+    this.title = this.notes[index].title;
+    this.color = this.notes[index].color;
+    this.text = this.notes[index].text;
+    this.label = this.notes[index].label;
+
     if (event.target.id == 'close-button') {
       this.deleteNote();
     } else {
@@ -179,8 +193,8 @@ class App {
           note.id
         }">
           <div class="${note.title && 'note-title'}">${note.title}</div>
-          <div class="note-te xt">${note.text}</div>
-          <div class="note-text">label : ${note.label}</div>
+          <div class="note-text">${note.text}</div>
+          <div class="note-label">label : ${note.label}</div>
           <button type="button" id="close-button">Close</button> 
           <div class="toolbar-container">
             <div class="toolbar">
